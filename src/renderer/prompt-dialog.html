@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline';">
+  <title>Custom Instruction</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    body {
+      background: transparent;
+      padding: 0;
+      margin: 0;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Wrap the dialog in a container that matches the main app's card style */
+    .dialog-container {
+      width: 480px;
+      height: 250px;
+      min-width: 480px;
+      min-height: 250px;
+      max-width: 480px;
+      max-height: 250px;
+      box-sizing: border-box;
+      background: var(--bg-card);
+      backdrop-filter: var(--glass-blur);
+      -webkit-backdrop-filter: var(--glass-blur);
+      border-radius: var(--radius-xl);
+      border: 0.5px solid var(--border);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      -webkit-app-region: drag;
+      /* Prevent any resizing glitches */
+      overflow: hidden;
+    }
+
+    .dialog-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .dialog-icon {
+      width: 32px;
+      height: 32px;
+      border-radius: var(--radius-md);
+      background: var(--bg-input);
+      color: var(--accent);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .dialog-title-area {
+      flex: 1;
+    }
+
+    .dialog-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 2px;
+    }
+
+    .dialog-subtitle {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .dialog-body {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      -webkit-app-region: no-drag;
+    }
+
+    /* Override input to fit perfectly */
+    #instructionInput {
+      font-size: 15px;
+      padding: 12px 14px;
+    }
+
+    .dialog-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+
+    /* Styled buttons matching the app's aesthetic */
+    .btn {
+      padding: 8px 16px;
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      outline: none;
+      transition: var(--transition-fast);
+      font-family: inherit;
+    }
+
+    .btn-cancel {
+      background: transparent;
+      color: var(--text-secondary);
+    }
+
+    .btn-cancel:hover {
+      background: var(--bg-input);
+      color: var(--text-primary);
+    }
+
+    .btn-submit {
+      background: var(--accent);
+      color: white;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .btn-submit:hover {
+      background: var(--accent-hover);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+
+    .btn-submit:active {
+      background: var(--accent-active);
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="dialog-container">
+    <div class="dialog-header">
+      <div class="dialog-icon">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+      </div>
+      <div class="dialog-title-area">
+        <div class="dialog-title">Custom Instruction</div>
+        <div class="dialog-subtitle">Tell the AI how to enhance your text</div>
+      </div>
+    </div>
+    <div class="dialog-body">
+      <div class="input-group">
+        <input type="text" id="instructionInput" placeholder="e.g. make it formal, translate to Spanish..."
+          autocomplete="off" autofocus>
+      </div>
+      <div class="dialog-actions">
+        <button class="btn btn-cancel" id="cancelBtn">Cancel</button>
+        <button class="btn btn-submit" id="submitBtn">Enhance</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="prompt-dialog.js"></script>
+</body>
+
+</html>
